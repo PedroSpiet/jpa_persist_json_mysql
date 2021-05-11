@@ -1,9 +1,11 @@
 package com.example.json.resources;
 
+import com.example.json.dto.JsonDTO;
 import com.example.json.model.Json;
 import com.example.json.services.JsonService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +20,14 @@ public class JsonController {
     JsonService service;
 
     @PostMapping
-    public Json test(@RequestBody Json json) {
-        return service.create(json);
+    public JsonDTO test(@RequestBody JsonDTO jsonDTO) {
+        Json create = service.create(jsonDTO);
+        ModelMapper mp = new ModelMapper();
+        return mp.map(create, JsonDTO.class);
     }
 
     @GetMapping
-    public List<Json> find() {
+    public List<JsonDTO> find() {
         return service.find();
     }
 }

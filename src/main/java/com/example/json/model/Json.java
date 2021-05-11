@@ -1,9 +1,11 @@
 package com.example.json.model;
 
 import com.example.json.util.HashMapConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -24,8 +26,8 @@ public class Json {
 
     private String lastName;
 
-    @Convert(converter = HashMapConverter.class)
-    private Map<String, Object> personAttributes;
+   @Convert(converter = HashMapConverter.class)
+    private List<Integer> personAttributes;
 
 
 }
